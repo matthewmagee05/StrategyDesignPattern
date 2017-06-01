@@ -7,7 +7,7 @@ const app = express();
 const router = express.Router();
 const animalData = require('../data/animalData');
 
-animals = animalData;
+const animals = animalData;
 
 //Get the individual unique properties from the animals
 let breedDirty = animals.map(animal => animal.breed);
