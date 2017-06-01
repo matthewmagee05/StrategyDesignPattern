@@ -1,0 +1,25 @@
+
+html
+  head
+    title= title
+  body
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js')
+    script(src='../js/helpers.js')
+    link(rel='stylesheet' href='../css/styles.css', type='text/css') 
+    h1 Pet Finder
+    select#breed.mainSelection
+      each breed in breeds
+        option #{breed}
+    select#gender.mainSelection
+      each gender in genders
+        option #{gender}
+    select#size.mainSelection
+      each size in sizes
+        option(value=size) #{size}
+    select#location.mainSelection
+      each location in locations
+        option #{location}
+    #wrapper
+      button.button#searchButton Search For Your Next Pet!
+    div#animalItem
+    script.var data = !{ animals }
