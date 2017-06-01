@@ -1,5 +1,16 @@
 $(document).ready(function() {
 	function search() {
+		//Find the animal that meets the dropdown selection criteria
+		let results = data.filter(isAnimalFound);
+		let resultsFormatted = results.map(item => {
+			return `<tr><td>${item.name}</td><td>${item.breed}</td> <td>${item.gender}</td> <td>${item.size}</td> <td>${item.location}</td></tr>`;
+		});
+
+		$('#myTable tr').slice(1).empty();
+		$('#myTable tr:last').after(resultsFormatted);
+	}
+
+	function isAnimalFound(obj) {
 		//Grap the values selected in the dropdown
 		let breedDropdown = document.getElementById('breed');
 		let selectedBreed = breedDropdown.options[breedDropdown.selectedIndex].text;
@@ -10,38 +21,14 @@ $(document).ready(function() {
 		let sizeDropdown = document.getElementById('size');
 		let selectedSize = sizeDropdown.options[sizeDropdown.selectedIndex].text;
 
-		locationDropdown = document.getElementById('location');
+		let locationDropdown = document.getElementById('location');
 		let selectedLocation = locationDropdown.options[locationDropdown.selectedIndex].text;
-
-		//Find the animal that meets the dropdown selection criteria
-		let results = data.filter(
-			obj =>
-				obj.breed === selectedBreed &&
-				obj.gender === selectedGender &&
-				obj.size === selectedSize &&
-				obj.location === selectedLocation
+		return (
+			obj.breed === selectedBreed &&
+			obj.gender === selectedGender &&
+			obj.size === selectedSize &&
+			obj.location === selectedLocation
 		);
-		let stuff = displayData(results);
-		//display the data in a table
-		$('#animalItem').html(
-			`<table border="1">
-				<tr>
-					<th>Name</th>
-					<th>Breed</th>
-					<th>Gender</th>
-					<th>Size</th>
-					<th>Location</th>
-				</tr>
-				<tr>
-					${displayData(results)}
-				</tr>
-			</table>`
-		);
-	}
-	function displayData(items) {
-		return items.map(item => {
-			return `<td>${item.name}</td><td>${item.breed}</td> <td>${item.gender}</td> <td>${item.size}</td> <td>${item.location}</td>`;
-		});
 	}
 
 	$('#searchButton').click(function() {
